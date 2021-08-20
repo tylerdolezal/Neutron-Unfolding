@@ -1,10 +1,16 @@
 import numpy as np
 
-def gravel(R,data,x,steps):
+def gravel(R,N,x,steps):
+    """
+    R --> Response matrix, shape is (n,m)
+    N --> pulse height spectrum, shape is (n,)
+    x --> initial guess at neutron spectrum, shape is (m,)
+    steps --> max number of iterations to perform
+    """
     m = R.shape[1]
     n = R.shape[0]
-    R = np.array([R[i] for i in range(n) if data[i] != 0])
-    data = np.array([x for x in data if x > 0])
+    R = np.array([R[i] for i in range(n) if N[i] != 0])
+    N = np.array([x for x in N if x > 0])
     n = R.shape[0]
 
     error = np.ones((steps+1,))
@@ -16,8 +22,8 @@ def gravel(R,data,x,steps):
 
         for j in range(m):
 
-            W[:,j] = data*R[:,j]*x[j] / rdot
-            num = np.dot(W[:,j],log(data/rdot))
+            W[:,j] = N*R[:,j]*x[j] / rdot
+            num = np.dot(W[:,j],log(N/rdot))
 
             num = np.nan_to_num(num)
             den = sum(W[:,j])
@@ -27,6 +33,6 @@ def gravel(R,data,x,steps):
             else:
                 x[j] *= exp(num/den)
 
-        chi2n = sum((rdot-data)**2 / data) / n
+        chi2n = sum((rdot-N)**2 / N) / n
         error[astep] = chi2n
         print("Iteration {}, tolerance = {}".format(astep,chi2n))
