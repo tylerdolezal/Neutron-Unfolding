@@ -36,3 +36,5 @@ def gravel(R,N,x,steps):
         chi2n = sum((rdot-N)**2 / N) / n
         error[astep] = chi2n
         print("Iteration {}, tolerance = {}".format(astep,chi2n))
+     
+    return(x,error)
