@@ -21,14 +21,14 @@ n,m = R.shape[0],R.shape[1]
 #----------------------------------------
 dir = "unfolding_inputs/"
 neutrons = pd.read_csv(dir+"reduced_data.csv")
-N1 = neutrons["NEUTRON 1"]
-N2 = neutrons["NEUTRON 2"]
+N1 = neutrons["NEUTRON 1"] # detector 1 signal
+N2 = neutrons["NEUTRON 2"] # detector 2 signal
 #----------------------------------------
 # Initial guess
 #----------------------------------------
 true_data = np.loadtxt(dir+"energy-spectrum.txt")
-xtrue,xbins = true_data[0],true_data[1]
-x = np.ones((m,))
+xtrue,xbins = true_data[0],true_data[1] # initial guess and also the ToF spectrum to plot against
+x = np.ones((m,)) # initial guess of all ones
 #----------------------------------------
 # use xtrue for ToF initial guess and
 # x = np.ones((m,)) for constant initial guess
