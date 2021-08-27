@@ -1,8 +1,10 @@
 import numpy as np
 import pandas as pd
-import myfuncs as fun
 import seaborn as sns
+from mlem import mlem
+from gravel import gravel
 import matplotlib.pyplot as plt
+from response-matrix import response_matrix
 from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 
 sns.set_theme()
