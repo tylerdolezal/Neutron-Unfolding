@@ -13,4 +13,6 @@ Hello, I hope you find the use of these unfolding algorithms painless!
    files and it seems to be common practice to store them in this way. Nevertheless, I wanted to bring attention to it to avoid any chance of 
    accidently taking the tranpose of a response matrix that doesn't need it.
 
-4. Currently, GRAVEL is the 
+4. Currently, GRAVEL is the top-performer and has been validated against a peer-reviewed GRAVEL algorithm. It also proves to be the more      robust of the algorithms.
+
+My choice: GRAVEL
