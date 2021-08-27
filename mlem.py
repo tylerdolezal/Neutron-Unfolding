@@ -1,17 +1,25 @@
 import numpy as np
 
 
-def mlem(R,N,x,steps):
-    n = len(N) # true is the recorded specturm
+def mlem(R,data,x,tolerance):
+    """
+    R --> Response matrix, shape is (n,m)
+    N --> pulse height spectrum, shape is (n,)
+    x --> initial guess at neutron spectrum, shape is (m,)
+    tolerance --> user-defined stopping condition
+    """
+    x = x.copy()
+    n = len(data) # true is the recorded specturm
     m = len(x)
-
-    error = np.ones((steps+1,))
-    for astep in range(steps+1):
+    J0 = 0 ; dJ0 = 1 ; ddJ = 1
+    error = []
+    stepcount = 1
+    while ddJ > tolerance:
         vector = np.zeros((n,))
         q = np.zeros((n,))
         for i in range(n):
             factor = (R[i,:]@x)
-            vector[i] = N[i]/factor
+            vector[i] = data[i]/factor
             q[i] = factor
 
         for j in range(m):
@@ -19,8 +27,14 @@ def mlem(R,N,x,steps):
             x[j] *= (1 / sum(R[:,j]))*term
 
 
-        J = sum((q-N)**2) / sum(q)
-        error[astep] = J
-        print("Iteration {}, J = {}".format(astep,J))
+        J = sum((q-data)**2) / sum(q)
+        dJ = J0 - J
+        ddJ = abs(dJ-dJ0)
+        error.append(ddJ)
+        J0 = J
+        dJ0 = dJ
+        print("Iteration {}, dJ = {}".format(stepcount,ddJ))
+        stepcount += 1
 
-    return(x,error)
+
+    return(x,np.array(error))

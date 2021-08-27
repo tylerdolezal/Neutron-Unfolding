@@ -4,7 +4,7 @@ import seaborn as sns
 from mlem import mlem
 from gravel import gravel
 import matplotlib.pyplot as plt
-from response-matrix import response_matrix
+from response_matrix import response_matrix
 from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 
 sns.set_theme()
@@ -35,9 +35,9 @@ x = np.ones((m,))
 #----------------------------------------
 # Execute the two algorithms
 #----------------------------------------
-tol = 1e-2
-xg,errorg = gravel(R,N1,xtrue,tol)
-xm,errorm = mlem(R,N1,xtrue,tol)
+tol = 1e-1
+xg,errorg = gravel(R,N1,x,tol)
+xm,errorm = mlem(R,N1,x,tol)
 
 fig,ax = plt.subplots()
 Lt = np.linalg.norm(xtrue)
@@ -54,7 +54,7 @@ ax.set_xlabel("Neutron Energy (MeV)")
 ax.set_ylabel("Normalized Counts")
 ax.xaxis.set_minor_locator(MultipleLocator(1))
 plt.legend(frameon=False)
-plt.savefig("final-results/real-data-gravel-true.png",dpi=300,bbox_inches="tight")
+plt.savefig("final_results/real-data-gravel-constant.png",dpi=300,bbox_inches="tight")
 
 plt.close()
 #-----------------------------------------
@@ -69,7 +69,7 @@ ax.set_xlabel("Neutron Energy (MeV)")
 ax.set_ylabel("Normalized Counts")
 ax.xaxis.set_minor_locator(MultipleLocator(1))
 plt.legend(frameon=False)
-plt.savefig("final-results/real-data-mlem-true.png",dpi=300,bbox_inches="tight")
+plt.savefig("final_results/real-data-mlem-constant.png",dpi=300,bbox_inches="tight")
 
 plt.close()
 #-----------------------------------------
@@ -88,5 +88,5 @@ ax.set_xlabel("Iteration")
 fig.text(0.55,0.15,"Stop Condition = {}".format(tol))
 ax.legend(frameon=False)
 
-plt.savefig("final-results/error-true.png",dpi=300,bbox_inches="tight")
+plt.savefig("final_results/error-constant.png",dpi=300,bbox_inches="tight")
 plt.close()
