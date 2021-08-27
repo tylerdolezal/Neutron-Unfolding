@@ -14,7 +14,7 @@ plt.rc('font', family='serif')
 #----------------------------------------
 # Response matrix import
 #----------------------------------------
-R = fun.response_matrix()
+R = response_matrix()
 n,m = R.shape[0],R.shape[1]
 #----------------------------------------
 # Pulse height import
@@ -36,8 +36,8 @@ x = np.ones((m,))
 # Execute the two algorithms
 #----------------------------------------
 tol = 1e-2
-xg,errorg = fun.gravel(R,N1,xtrue,tol)
-xm,errorm = fun.mlem(R,N1,xtrue,tol)
+xg,errorg = gravel(R,N1,xtrue,tol)
+xm,errorm = mlem(R,N1,xtrue,tol)
 
 fig,ax = plt.subplots()
 Lt = np.linalg.norm(xtrue)
