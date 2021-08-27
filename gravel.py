@@ -16,10 +16,10 @@ def gravel(R,data,x,tolerance):
     data = np.array([x for x in data if x > 0])
     # redefine number of rows after the reduction
     n = R.shape[0]
-    chi2n0 = 0 ; dx0 = 1 ; ddx = 1
+    J0 = 0 ; dJ0 = 1 ; ddJ = 1
     error = []
     stepcount = 1
-    while ddx > tolerance:
+    while ddJ > tolerance:
         W = np.zeros((n,m))
         rdot = np.zeros((n,))
         for i in range(n):
@@ -38,14 +38,13 @@ def gravel(R,data,x,tolerance):
             else:
                 x[j] *= exp(num/den)
 
-        chi2n = sum((rdot-data)**2) / sum(rdot)
-        dx = chi2n0-chi2n
-        ddx = abs(dx-dx0)
-        chi2n0 = chi2n
-        error.append(ddx)
-        print("Iteration {}, dx = {}".format(stepcount,ddx))
+        J = sum((rdot-data)**2) / sum(rdot)
+        dJ = J0-J
+        ddJ = abs(dJ-dJ0)
+        J0 = J
+        error.append(ddJ)
+        print("Iteration {}, ddJ = {}".format(stepcount,ddJ))
         stepcount += 1
-
-        dx0 = dx
+        dJ0 = dJ
 
     return(x,np.array(error))
