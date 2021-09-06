@@ -14,3 +14,5 @@ Hello, I hope you find the use of these unfolding algorithms painless!
    accidently taking the tranpose of a response matrix that doesn't need it.
 
 4. execute.py was setup to run both algorithms for comparison purposes. Because GRAVEL was the top performing algorithm, I'd suggest using it over MLEM. The script       execute_gravel.py will use only GRAVEL
+
+5. In the report_and_presentation directory are a copy of the lab report and project presentation that went into developing these algorithms 
