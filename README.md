@@ -1,5 +1,5 @@
 # Neutron-Unfolding
-Python implementations of GRAVEL and MLEM algorithims are available within
+Python implementations of GRAVEL and MLEM algorithms are available within
 
 Hello, I hope you find the use of these unfolding algorithms painless!
 
